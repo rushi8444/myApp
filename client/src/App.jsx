@@ -5,6 +5,18 @@ function App() {
   const [value, setValue] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [copied, setCopied] = useState(false)
+  const [isFormatted, setIsFormatted] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      setError('Failed to copy text.')
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -34,6 +46,7 @@ function App() {
       }
 
       setValue(data.formattedText || '')
+      setIsFormatted(true)
     } catch {
       setError('Unable to reach API server. Make sure it is running on port 3000.')
     } finally {
@@ -50,12 +63,22 @@ function App() {
         <form className="home-form" onSubmit={handleSubmit}>
           <textarea
             value={value}
-            onChange={(event) => setValue(event.target.value)}
+            onChange={(event) => {
+              setValue(event.target.value)
+              setIsFormatted(false)
+            }}
             placeholder="Enter text"
           />
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Formatting...' : 'Submit'}
-          </button>
+          <div className="button-group">
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Formatting...' : 'Submit'}
+            </button>
+            {isFormatted && (
+              <button type="button" onClick={handleCopy} className="copy-btn" disabled={isSubmitting}>
+                {copied ? 'Copied!' : 'Copy Text'}
+              </button>
+            )}
+          </div>
           {error && <p className="error-text">{error}</p>}
         </form>
       </section>

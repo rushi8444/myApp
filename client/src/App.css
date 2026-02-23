@@ -61,6 +61,13 @@
   font-size: 1rem;
 }
 
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
 .home-form button {
   align-self: center;
   min-width: 200px;
@@ -81,6 +88,14 @@
 .home-form button:disabled {
   opacity: 0.72;
   cursor: not-allowed;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.copy-btn:hover:enabled {
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.28) !important;
 }
 
 .error-text {
