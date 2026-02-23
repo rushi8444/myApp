@@ -16,9 +16,9 @@ function App() {
 
     setError('')
     setIsSubmitting(true)
-
+    https://my-app-seven-sigma-11.vercel.app/
     try {
-      const response = await fetch('http://localhost:3000/api/format-text', {
+      const response = await fetch('https://my-app-seven-sigma-11.vercel.app/api/format-text', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
