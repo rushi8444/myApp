@@ -1,6 +1,6 @@
 import http from 'node:http'
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 function removeProtectedAssessmentBlock(text) {
   const lines = text.replace(/\r\n?/g, '\n').split('\n')
